@@ -1,5 +1,4 @@
-
-[
+const rabbitNames = [
 	"Adorable",
 	"Alliebear",
 	"Amazing",
