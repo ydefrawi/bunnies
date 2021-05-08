@@ -1,12 +1,47 @@
-var colors = require('colors');
-//class to create a person
+// PSEUDO CODE
+//!--------------------------------------
+// class to create a person
 // Function to generate x number people
-//Function to create random people attributes for each generate person(age, charisma, gender)
-//Function to randomly pair them and test compatibility
-//If compatable then perhaps they procreate
+// Function to create random people attributes for each generate person(age, charisma, gender)
+// Function to randomly pair them and test compatibility
+// If compatable then perhaps they procreate
 // Perhaps a gestation period where said person could not procreate during measured in iterations.
 // Progeny shouldn't be eligible for procreation for a span of iterations aka maturation.
-//sit back watch your creations blink in and out of existence
+// sit back watch your creations blink in and out of existence
+//! ------------------------------------------
+
+
+// HOW IT WORKS
+
+//There's a starting group of rabbits numbering from 2 to 5 (randomly generated int). 
+//It's made up of males and females 
+
+//The starting group function alternates between creating a male and a female for the length of the randomly generated int.
+//Males are stored in maleRabbits array, females in femaleRabbits array
+
+// selectAlphaMale() selects the male from the male array with the highest CONFIDENCE level and removes it from maleRabbits
+// selectAlphaFemale() selects the female from the female array with the highest WILDNESS level and removes it from femaleRabbits
+
+//LETS MINGLE 
+// calls the select alpha functions to grab the male and female
+// They are made a couple (new instance of Couple class is created) and are pushed into the allCouples array
+// offspring() function is called which generates between 2 and 5 new rabbits and pushes them into male or female array. 
+
+//offspring calls letsMingle again, completing the circle.  
+
+//TODO: Make female selection less random. 
+//TODO: Randomly give the male a desired trait and have him look for  female with highest number for that trait
+
+//TODO: Store children in an array upon birth. 
+//TODO: They can stay there while they age until old enough to be added to the dating pool (maleRabbits and femaleRabbits)
+
+//TODO: aging() method in Rabbit class must only be called ONCE on every child rabbit
+
+
+
+
+
+var colors = require('colors');
 const asciiHeart=`
 ,d88b.d88b,
 88888888888
@@ -75,21 +110,23 @@ selectAlphaMale = () =>{
         return b.confidence - a.confidence;
     })
     alphaMale = maleRabbits[0];
+    //removes the alphaMale rabbit from the maleRabbits array
     maleRabbits.shift();
+
     // allRabbits = allRabbits.filter(item=> item !==alphaMale.name )
-    
-    console.log(alphaMale)
+
     return alphaMale;
 }
 
 selectFemale = () =>{
+// TODO: select female based on the male's preferred trait, and sort based on that trait instead of the hardcoded 'wildness' below
     femaleRabbits.sort((a,b) => {
         return b.wildness - a.wildness;
       })
     alphaFemale=femaleRabbits[0];
+    //removes the alphaFemale rabbit from the femaleRabbits array
     femaleRabbits.shift();
     
-    // allRabbits = allRabbits.filter(item=> item !==alphaFemale.name )
     return alphaFemale
     };
 

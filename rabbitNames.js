@@ -223,6 +223,8 @@ const rabbitNames = [
 	"McDreamy",
 	"McSteamy",
 	"Mister Cutie",
+	"Moriah Ann",
+	"Sef",
 	"Monkey",
 	"Monkey Buns",
 	"Mookie-Pookie Bear",
