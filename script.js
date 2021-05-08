@@ -13,13 +13,24 @@ const asciiHeart=`
   'Y888Y'   
     'Y'
 `
+
+const attributes = {
+    wild: "wildness",
+    confident:"confidence",
+    charismatic:"charisma",
+    beautiful: "appearance",
+    patient: "patience"
+}
+
 const rabbitNames = require('./rabbitNames')
 const { Rabbit, Male, Female } = require('./rabbitClasses')
+const { Console } = require('console')
 
 const startingRabbits = []
 const maleRabbits = []
 const femaleRabbits = []
-const allRabbits = [];
+let allRabbits = [];
+const allCouples=[];
 
 //generates a random boolean
 randBoolean = () =>{
@@ -34,12 +45,13 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+randBool = randBoolean();
+const rand2to5 = getRandomInt(2, 5)
+const x = rand2to5;
 
 //These Are the first rabbits randomly spawned
 const startingGroup = () => {
-    randBool = randBoolean();
-    const rand2to5 = getRandomInt(2, 10)
-    const x = rand2to5;
+
     console.log(`You start with ${x} rabbits\n------------------`)
     for (let index = 0; index < x; index++) {
         if (randBool) {
@@ -48,6 +60,7 @@ const startingGroup = () => {
             femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)]));
         }  randBool = !randBool;
     } 
+    allRabbits.push(...maleRabbits,...femaleRabbits);
     maleRabbits.forEach(rab => {
         rab.sayHello();
     })
@@ -56,13 +69,15 @@ const startingGroup = () => {
     })
 }
 
-selectMale = () =>{
-    randomMale=maleRabbits[getRandomInt(0, maleRabbits.length)]
-    // console.log(`\n--------------`)
-    // console.log(`ALPHA MALE`)
-    // console.log(randomMale)
-    // console.log(`---------------\n`)
-    return randomMale;
+selectAlphaMale = () =>{
+    maleRabbits.sort((a,b) => {
+        return b.confidence - a.confidence;
+      })
+    alphaMale = maleRabbits[0];
+    maleRabbits.shift();
+    // allRabbits = allRabbits.filter(item=> item !==alphaMale.name )
+
+    return alphaMale;
 }
 
 selectFemale = () =>{
@@ -70,36 +85,76 @@ selectFemale = () =>{
         return b.wildness - a.wildness;
       })
     alphaFemale=femaleRabbits[0];
+    femaleRabbits.shift();
+    
+    // allRabbits = allRabbits.filter(item=> item !==alphaFemale.name )
     return alphaFemale
-    // let wildnessArray = femaleRabbits.map(a=>a.wildness);
-    // console.log(wildnessArray)
-}
+    };
+
+
 
 letsMingle = () =>{
-    male = selectMale();
+    male = selectAlphaMale();
     female = selectFemale()
+
     console.log(`\n${male.name} has decided to take the lead\n`)
+    console.log(`${male.name} is looking for a wild female.`)
+    console.log(`Who's that special someone?`)
+    console.log(`...`)
+    console.log(`${male.name} has chosen ${female.name}!`)
+    console.log(asciiHeart)
+    console.log("They are now married!")
+
+    const couple = new Couple(male, female)
+    allCouples.push(couple)
+
+setTimeout(() => {
+    couple.kiss() 
     setTimeout(() => {
-        console.log(`${male.name} is looking for a wild female.\n`)
+        offspring(couple)
     }, 2000);
-    
-    setTimeout(() => {
-        console.log(`Who's that special someone?\n`)
-    }, 2500);
-    setTimeout(() => {
-        console.log(`...\n`)
-    }, 3000);
-    setTimeout(() => {
-        console.log(`${male.name} has chosen ${female.name}!`)
-    }, 4000);
-    setTimeout(() => {
-        console.log(asciiHeart)
-    }, 5000);
+}, 2000);
+
+}   
+
+const offspring = (couple) => {
+    randBool = randBoolean();
+    const rand2to5 = getRandomInt(2, 4)
+    const y = rand2to5;
+    console.log(`${couple.husband.name} and ${couple.wife.name} have ${y} babies`)
+    console.log(`\n`)
+    for (let index = 0; index < y; index++) {
+        if (randBool) {
+            maleRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)],1));
+        } else {
+            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)],1));
+        }  randBool = !randBool;
+    } 
+    allRabbits.push(...maleRabbits,...femaleRabbits);
 
 
+    maleRabbits.sort((a,b) => {
+        return b.age - a.age;
+      })
+    maleRabbits.forEach(rab => {
+        rab.sayHello();
+    })
+    femaleRabbits.sort((a,b) => {
+        return b.age - a.age;
+      })
+    femaleRabbits.forEach(rab => {
+        rab.sayHello();
+    })
 
+console.log(`\n`)
+console.log(`------------------------------`)
+console.log(`You started with ${x} rabbits!`)
+console.log(`Now you have ${allRabbits.length} rabbits and ${allCouples.length} couples!`)
+console.log(`\n`)
+console.log(`------------------------------`)
+
+letsMingle();
 }
-
 
 // const makeRabbits = (rabbits) => {
 //     for (let i = 0; i < 10; i++) {
@@ -119,9 +174,6 @@ init = () => {
 init()
 
 
-
-letsMingle = () => {
-}
 
 // Pen = class Pen {
 //     constructor(allRabbits){

@@ -1,23 +1,23 @@
 require 
 //Rabbit Class
 Rabbit = class Rabbit {
-    constructor(appearance, charisma, age, impatience) {
-        this.appearance = Math.floor(Math.random() * 10) + 1;
-        this.charisma = Math.floor(Math.random() * 10) + 1;
-        this.age = Math.floor(Math.random() * 14) + 15;
-        this.impatience = Math.floor(Math.random() * 10) + 1;
-        this.name = ""
-    }
+    constructor(name) {
 
+        
+        this.charisma = Math.floor(Math.random() * 10) + 1;
+        this.appearance = Math.floor(Math.random() * 10) + 1;
+        this.patience = Math.floor(Math.random() * 10) + 1;
+    }
 }
 
 //Male and Female subclasses
 class Male extends Rabbit {
-    constructor(name) {
+    constructor(name, age=Math.floor(Math.random() * 14) + 15) {
         super();
+        this.age = age
+        this.name=name
         this.gender = "male";
         this.confidence = Math.floor(Math.random() * 10) + 1;
-        this.name = name;
     }
 
     sayHello() {
@@ -32,11 +32,12 @@ class Male extends Rabbit {
 }
 
 class Female extends Rabbit {
-    constructor(name) {
+    constructor(name, age=Math.floor(Math.random() * 14) + 15) {
         super();
+        this.age = age;
+        this.name = name;
         this.gender = "female";
         this.wildness = Math.floor(Math.random() * 10) + 1;
-        this.name = name;
     }
 
     sayHello() {
@@ -51,6 +52,19 @@ class Female extends Rabbit {
 }
 
 
+Couple = class Couple {
+    constructor(male, female) {
+        this.husband = male
+        this.wife = female
+    }
+
+    kiss(){
+        console.log(`${this.husband.name} kisses ${this.wife.name}`)
+    }
+}
+
+
 module.exports = {
     Rabbit, Male, Female
 }
+
