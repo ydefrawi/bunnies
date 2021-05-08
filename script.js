@@ -11,10 +11,15 @@ const rabbitNames = require('./rabbitNames')
 const { Rabbit, Male, Female } = require('./rabbitClasses')
 
 const startingRabbits = []
+const maleRabbits = []
+const femaleRabbits = []
 const allRabbits = [];
 
 //generates a random boolean
-const randomBoolean = Math.random() < 0.5;
+randBoolean = () =>{
+    let randomBoolean = Math.random() < 0.5;
+    return randomBoolean
+}
 
 //helper function - gets random integer between min and max
 const getRandomInt = (min, max) => {
@@ -26,23 +31,41 @@ const getRandomInt = (min, max) => {
 
 //These Are the first rabbits randomly spawned
 const startingGroup = () => {
+    randBool = randBoolean();
     const rand2to5 = getRandomInt(2, 5)
     const x = rand2to5;
     console.log(`You start with ${x} rabbits\n------------------`)
     for (let index = 0; index < x; index++) {
-        if (!randomBoolean) {
-            startingRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)]));
+        if (randBool) {
+            maleRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)]));
         } else {
-            startingRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)]));
-        }
+            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)]));
+        }  randBool = !randBool;
     } 
-    startingRabbits.forEach(rab => {
+    maleRabbits.forEach(rab => {
+        rab.sayHello();
+    })
+    femaleRabbits.forEach(rab => {
         rab.sayHello();
     })
 }
 
+selectMale = () =>{
+    randomMale=maleRabbits[getRandomInt(0, maleRabbits.length)]
+    console.log(randomMale)
+    return randomMale;
+}
 
+selectFemale = () =>{
+    let wildnessArray = femaleRabbits.map(a=>a.wildness);
+    console.log(wildnessArray)
+}
 
+letsMingle = () =>{
+    randomMale = selectMale();
+    
+
+}
 
 
 // const makeRabbits = (rabbits) => {
@@ -56,6 +79,9 @@ const startingGroup = () => {
 
 init = () => {
     startingGroup()
+    selectMale()
+    console.log(femaleRabbits)
+    selectFemale()
     // makeRabbits()
 }
 
