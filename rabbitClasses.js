@@ -4,10 +4,16 @@ var colors = require('colors');
 Rabbit = class Rabbit {
     constructor(name) {
 
-        
+        this.age = 0
         this.charisma = Math.floor(Math.random() * 10) + 1;
         this.appearance = Math.floor(Math.random() * 10) + 1;
         this.patience = Math.floor(Math.random() * 10) + 1;
+    }
+
+    aging() {
+        setInterval(() => {
+            this.age+2;
+        }, 3000);
     }
 }
 

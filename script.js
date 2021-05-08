@@ -46,7 +46,7 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-randBool = randBoolean();
+let randBool = randBoolean();
 const rand2to5 = getRandomInt(2, 5)
 const x = rand2to5;
 
@@ -73,11 +73,12 @@ const startingGroup = () => {
 selectAlphaMale = () =>{
     maleRabbits.sort((a,b) => {
         return b.confidence - a.confidence;
-      })
+    })
     alphaMale = maleRabbits[0];
     maleRabbits.shift();
     // allRabbits = allRabbits.filter(item=> item !==alphaMale.name )
-
+    
+    console.log(alphaMale)
     return alphaMale;
 }
 
