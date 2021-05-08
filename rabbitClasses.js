@@ -1,4 +1,5 @@
-require 
+var colors = require('colors'); 
+
 //Rabbit Class
 Rabbit = class Rabbit {
     constructor(name) {
@@ -21,8 +22,8 @@ class Male extends Rabbit {
     }
 
     sayHello() {
-        console.log(`Hi I'm ${this.name}`)
-        console.log(`I'm ${this.age} years old and a ${this.gender}!`)
+        console.log(`Hi I'm ${this.name}`.brightYellow)
+        console.log(`I'm ${this.age} years old and a ${this.gender}!`.brightYellow)
     }
 
     matingCall() {
@@ -41,8 +42,8 @@ class Female extends Rabbit {
     }
 
     sayHello() {
-        console.log(`Hi I'm ${this.name}`)
-        console.log(`I'm ${this.age} years old and a ${this.gender}!`)
+        console.log(`Hi I'm ${this.name}`.brightYellow)
+        console.log(`I'm ${this.age} years old and a ${this.gender}!`.brightYellow)
     }
 
     matingCall () {
@@ -59,7 +60,7 @@ Couple = class Couple {
     }
 
     kiss(){
-        console.log(`${this.husband.name} kisses ${this.wife.name}`)
+        console.log(`${this.husband.name} kisses ${this.wife.name}`.underline.brightRed)
     }
 }
 

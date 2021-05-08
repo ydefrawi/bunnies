@@ -1,3 +1,4 @@
+var colors = require('colors');
 //class to create a person
 // Function to generate x number people
 //Function to create random people attributes for each generate person(age, charisma, gender)
@@ -98,12 +99,14 @@ letsMingle = () =>{
     female = selectFemale()
 
     console.log(`\n${male.name} has decided to take the lead\n`)
-    console.log(`${male.name} is looking for a wild female.`)
-    console.log(`Who's that special someone?`)
+    console.log(`${male.name} is looking for a wild female.`.bold.brightRed)
+    console.log(`Who's that special someone?`.bold.brightRed)
+    console.log(asciiHeart.red)
     console.log(`...`)
-    console.log(`${male.name} has chosen ${female.name}!`)
-    console.log(asciiHeart)
-    console.log("They are now married!")
+    console.log(`${male.name} has chosen ${female.name}!`.brightGreen)
+    setTimeout(() => {        
+        console.log("They are now married!")
+    }, 2000);
 
     const couple = new Couple(male, female)
     allCouples.push(couple)
@@ -148,12 +151,12 @@ const offspring = (couple) => {
 
 console.log(`\n`)
 console.log(`------------------------------`)
-console.log(`You started with ${x} rabbits!`)
-console.log(`Now you have ${allRabbits.length} rabbits and ${allCouples.length} couples!`)
-console.log(`\n`)
+console.log(`You started with ${x} rabbits!`.brightCyan)
+console.log(`Now you have ${allRabbits.length} rabbits and ${allCouples.length} couples!`.brightCyan)
 console.log(`------------------------------`)
-
-letsMingle();
+setTimeout(() => {
+    letsMingle();
+}, 3000);
 }
 
 // const makeRabbits = (rabbits) => {
