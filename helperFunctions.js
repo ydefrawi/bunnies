@@ -1,3 +1,5 @@
+//TODO export this and import it into script.js if i end up adding more helper functions
+
 //helper function - gets random integer between min and max
 const getRandomInt = (min, max) => {
     min = Math.ceil(min);
