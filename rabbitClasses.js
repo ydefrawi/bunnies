@@ -66,7 +66,7 @@ Couple = class Couple {
     }
 
     kiss(){
-        console.log(`${this.husband.name} kisses ${this.wife.name}`.underline.brightRed)
+        console.log(`**${this.husband.name} kisses ${this.wife.name}**`.bold.underline.brightRed)
     }
 }
 

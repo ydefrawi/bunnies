@@ -1,3 +1,4 @@
+var colors = require('colors');
 // PSEUDO CODE
 //!--------------------------------------
 // class to create a person
@@ -37,11 +38,20 @@
 
 //TODO: aging() method in Rabbit class must only be called ONCE on every child rabbit
 
+const asciiRabbit =String.raw`
+           ,\
+           \\\,_
+            \' ,\
+       __,.-" =__)
+     ."        )
+  ,_/   ,    \/\_
+  \_|    )_-\ \_-'
+    '-----' '--'
+`
 
 
 
 
-var colors = require('colors');
 const asciiHeart=`
 ,d88b.d88b,
 88888888888
@@ -87,7 +97,6 @@ const x = rand2to5;
 
 //These Are the first rabbits randomly spawned
 const startingGroup = () => {
-
     console.log(`You start with ${x} rabbits\n------------------`)
     for (let index = 0; index < x; index++) {
         if (randBool) {
@@ -97,12 +106,19 @@ const startingGroup = () => {
         }  randBool = !randBool;
     } 
     allRabbits.push(...maleRabbits,...femaleRabbits);
-    maleRabbits.forEach(rab => {
-        rab.sayHello();
-    })
-    femaleRabbits.forEach(rab => {
-        rab.sayHello();
-    })
+
+    setTimeout(() => {
+        maleRabbits.forEach(rab => {
+            rab.sayHello();
+        })
+        femaleRabbits.forEach(rab => {
+            rab.sayHello();
+        })
+    }, 500);
+
+    setTimeout(() => {
+        letsMingle();
+    }, 2000);
 }
 
 selectAlphaMale = () =>{
@@ -136,65 +152,103 @@ letsMingle = () =>{
     male = selectAlphaMale();
     female = selectFemale()
 
-    console.log(`\n${male.name} has decided to take the lead\n`)
-    console.log(`${male.name} is looking for a wild female.`.bold.brightRed)
-    console.log(`Who's that special someone?`.bold.brightRed)
-    console.log(asciiHeart.red)
-    console.log(`...`)
-    console.log(`${male.name} has chosen ${female.name}!`.brightGreen)
-    setTimeout(() => {        
-        console.log("They are now married!")
-    }, 2000);
-
     const couple = new Couple(male, female)
     allCouples.push(couple)
 
-setTimeout(() => {
-    couple.kiss() 
+    //takes 7 seconds to print in its entirety 
+    mingleLogs(male, female,couple)
+
+
     setTimeout(() => {
         offspring(couple)
-    }, 2000);
-}, 2000);
+    }, 8000);
 
 }   
+
+const mingleLogs=(male, female,couple)=>{
+
+    console.log(`\n${male.name} has decided to take the lead\n`)
+
+    setTimeout(() => {
+        console.log(`${male.name} is looking for a wild female.`.bold.brightRed)
+
+    }, 1000);
+
+    setTimeout(() => {
+        console.log(`Who's that special someone?`.bold.brightCyan)
+        setTimeout(() => {
+            setTimeout(() => {
+                setTimeout(() => {
+                    setTimeout(() => {
+                        console.log(`${male.name} has chosen ${female.name}!\n`.brightGreen)
+
+                    }, 500);
+                    process.stdout.write(".");
+                }, 200);
+                process.stdout.write(".");
+            }, 200);
+            process.stdout.write(".");
+        }, 1000);
+    }, 2000);
+
+    setTimeout(() => {
+        couple.kiss() 
+    }, 6000);
+
+    setTimeout(() => {        
+        console.log(asciiHeart.bold.brightRed)
+        console.log("They are now married!")
+        console.log("")
+    }, 7000);
+
+}
+
 
 const offspring = (couple) => {
     randBool = randBoolean();
     const rand2to5 = getRandomInt(2, 4)
     const y = rand2to5;
-    console.log(`${couple.husband.name} and ${couple.wife.name} have ${y} babies`)
-    console.log(`\n`)
+
+    console.log(`${couple.husband.name} and ${couple.wife.name} have ${y} babies`.brightMagenta)
+    console.log(asciiRabbit.magenta)
+
     for (let index = 0; index < y; index++) {
         if (randBool) {
-            maleRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)],1));
+            maleRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)], 1));
         } else {
-            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)],1));
-        }  randBool = !randBool;
-    } 
-    allRabbits.push(...maleRabbits,...femaleRabbits);
+            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)], 1));
+        } randBool = !randBool;
+    }
+    allRabbits.push(...maleRabbits, ...femaleRabbits);
+    
+    setTimeout(() => {
+        console.log(`\n`)
+        console.log(`------------------------------`)
+        console.log(`You started with ${x} rabbits!`.brightCyan)
+        console.log(`Now you have ${allRabbits.length} rabbits and ${allCouples.length} couples!`.brightCyan)
+        console.log(`------------------------------`)
+    }, 1000);
+
+    setTimeout(() => {
+        maleRabbits.sort((a, b) => {
+            return b.age - a.age;
+        })
+        maleRabbits.forEach(rab => {
+            rab.sayHello();
+        })
+        femaleRabbits.sort((a, b) => {
+            return b.age - a.age;
+        })
+        femaleRabbits.forEach(rab => {
+            rab.sayHello();
+        })
+
+    }, 3000);
 
 
-    maleRabbits.sort((a,b) => {
-        return b.age - a.age;
-      })
-    maleRabbits.forEach(rab => {
-        rab.sayHello();
-    })
-    femaleRabbits.sort((a,b) => {
-        return b.age - a.age;
-      })
-    femaleRabbits.forEach(rab => {
-        rab.sayHello();
-    })
-
-console.log(`\n`)
-console.log(`------------------------------`)
-console.log(`You started with ${x} rabbits!`.brightCyan)
-console.log(`Now you have ${allRabbits.length} rabbits and ${allCouples.length} couples!`.brightCyan)
-console.log(`------------------------------`)
-setTimeout(() => {
-    letsMingle();
-}, 3000);
+    setTimeout(() => {
+        letsMingle();
+    }, 3000);
 }
 
 // const makeRabbits = (rabbits) => {
@@ -208,7 +262,7 @@ setTimeout(() => {
 
 init = () => {
     startingGroup()
-    letsMingle()
+    // letsMingle()
     // makeRabbits()
 }
 
