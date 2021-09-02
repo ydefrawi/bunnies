@@ -216,7 +216,7 @@ const offspring = (couple) => {
         if (randBool) {
             maleRabbits.push(new Male(rabbitNames[getRandomInt(0, 350)], 1));
         } else {
-            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)], 1));
+            femaleRabbits.push(new Female(rabbitNames[getRandomInt(0, 350)],1));
         } randBool = !randBool;
     }
     allRabbits.push(...maleRabbits, ...femaleRabbits);

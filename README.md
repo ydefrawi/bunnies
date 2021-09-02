@@ -1,5 +1,5 @@
-# bunnies
-
+# Bunnies
+![Demo](bunnies-demo.gif)
 ## How it works
 
 This follows one branch of a family tree of rabbits
