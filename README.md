@@ -1,5 +1,10 @@
 # Bunnies
 ![Demo](bunnies-demo.gif)
+
+## Introduction
+
+Watch as your starting group of 2 to 5 rabbits find each other, get married, have offspring, and multiply!
+
 ## How it works
 
 This follows one branch of a family tree of rabbits
@@ -23,7 +28,19 @@ offspring() function is called which generates between 2 and 5 new rabbits and p
 
 offspring calls letsMingle again, completing the circle.  
 
-### TODO
+## Setup and Usage
+
+To run this locally, clone the repository and install node and dependencies ('npm i')
+
+Enter 'npm start' in your terminal to run the application!
+
+### Dependencies
+
+* Node v16.0.0
+
+* Colors.js v1.4.0
+
+### TO-DO
 Make female selection less random. 
 
 Randomly give the male a desired trait and have him look for  female with highest number for that trait
